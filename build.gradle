@@ -1,0 +1,31 @@
+buildscript {
+	ext {
+		springBootVersion = '2.1.1.RELEASE'
+		springCloudVersion = 'Greenwich.M1'
+		sonarVersion = '2.7'
+		netSalimanVersion = '3.0.0'
+	}
+	repositories {
+		mavenCentral()
+		maven { url "https://repo.spring.io/snapshot" }
+		maven { url "https://repo.spring.io/milestone" }
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:${sonarVersion}")
+		classpath("net.saliman:gradle-cobertura-plugin:${netSalimanVersion}")
+	}
+}
+
+plugins {
+	id "org.sonarqube" version "2.7"
+	id "co.com.bancolombia.cleanArchitecture" version "1.5.4"
+	id "net.saliman.cobertura" version "3.0.0" 
+}
+
+sonarqube {
+	properties {
+		property "sonar.sourceEnconding", "UTF-8"
+	}
+}
+apply from: './main.gradle'
